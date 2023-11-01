@@ -2,26 +2,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def ex2():
-    N = 10 
-
-    t = np.linspace(0, 1, N)
-    x = np.sin(2 * np.pi * 100 * t)
-
-    y = np.array([[np.exp(2 * np.pi * 1j * m * n / N) for n in range(N)] for m in range(N)], dtype=complex) * x
-
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
-
-    ax1.plot(t, x)
-    ax1.set_xlabel('Timp (s)')
-    ax1.set_ylabel('Amplitudine')
-    ax1.set_title('Semnal Sinusoidal')
-
-    ax2.plot(np.real(y), np.imag(y))
-    ax2.set_xlabel('Re(y[n])')
-    ax2.set_ylabel('Im(y[n])')
-    ax2.set_title('Cercul Unitate')
-
-    plt.tight_layout()
-    plt.show()
-
+    f = 5
+    n = 800
+    t = np.linspace(0, 2, n)
+    x = np.sin(2 * np.pi * f * t)
     
+    X = np.empty(n, dtype=complex)
+    for i in range(n):
+        X[i] = x[i] * np.e ** (-2 * np.pi * 1j * t[i])
+
+    _, axs = plt.subplots(2)
+    plt.suptitle('Semnal sinusoidal')
+    axs[0].plot(t, x, 'g')
+    axs[0].axhline(0, c='black')
+
+    axs[1].scatter(X.real, X.imag, s=3, c=np.sqrt(X.real**2 + X.imag**2))
+    axs[1].set_xlim([-1.2, 1.2])
+    axs[1].set_ylim([-1.2, 1.2])
+    axs[1].set_xlabel('Real')
+    axs[1].set_ylabel('Imaginar')
+    axs[1].set_aspect('equal', adjustable='box')
+
+    plt.show()

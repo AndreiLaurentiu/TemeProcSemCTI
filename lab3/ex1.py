@@ -12,7 +12,7 @@ def ex1():
     fig.suptitle('Partea imaginara/ Reala')
 
     for i, ax_row in enumerate(axs):
-        ax_row[0].plot(range(N), np.real(F[i]), 'b')
+        ax_row[0].plot(range(N), np.real(F[i]), 'g')
         ax_row[1].plot(range(N), np.imag(F[i]), 'r')
     
     #if abs(np.dot(F, F.conj().T) - N * np.identity(N)) <= 0.001:
