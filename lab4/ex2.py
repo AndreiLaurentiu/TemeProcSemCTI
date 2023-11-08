@@ -3,30 +3,22 @@ import matplotlib.pyplot as plt
 
 def ex2():
 
-    # Parametrii semnalului
-    amplitudine = 1.0
-    frecventa_originala = 10.0  # Hz
-    frecventa_esantionare = 15.0  # Hz (sub-Nyquist)
+    t = np.linspace(0, 1, 1000)
 
-    # Timpul de esantionare
-    T = 1.0 / frecventa_esantionare
-    t = np.arange(0, 1, T)
+    fig, axs = plt.subplots(4)
 
-    # Semnalul sinusoidal original
-    semnal_original = amplitudine * np.sin(2 * np.pi * frecventa_originala * t)
+    axs[0].plot(t, np.sin(2 * np.pi * 10 * t))
 
-    # Esantionarea semnalului original
-    semnal_esantionat = amplitudine * np.sin(2 * np.pi * frecventa_originala * t)
+    fs = 21
+    t_ = np.linspace(0, 1, fs)
+    axs[1].plot(t, np.sin(2 * np.pi * 10 * t))
+    axs[1].scatter(t_, np.sin(2 * np.pi * 10 * t_), c="gray")
 
-    # Plasarea pe aceeasi figura a semnalului original si a celui esantionat
-    plt.figure()
-    plt.subplot(2, 1, 1)
-    plt.plot(t, semnal_original)
-    plt.title('Semnal Original')
+    axs[2].plot(t, np.sin(2 * np.pi * 4 * t))
+    axs[2].scatter(t_, np.sin(2 * np.pi * 4 * t_), c="green")
 
-    plt.subplot(2, 1, 2)
-    plt.plot(t, semnal_esantionat)
-    plt.title('Semnal Esantionat cu frecventa sub-Nyquist')
+    axs[3].plot(t, np.sin(2 * np.pi * 6 * t))
+    axs[3].scatter(t_, np.sin(2 * np.pi * 6 * t_), c="green")
 
     plt.tight_layout()
     plt.show()
